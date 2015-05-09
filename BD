@@ -1,0 +1,2456 @@
+USE [master]
+go
+create database [SIGCESK_F]
+go
+USE [SIGCESK_F]
+GO
+/****** Object:  Table [dbo].[Regional]    Script Date: 11/14/2014 22:14:09 ******/
+
+GO
+CREATE TABLE [dbo].[Regional](
+	[Id_Regional] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[id_regional2] [numeric](18, 0) NOT NULL,
+	[Nombre_Regional] [varchar](50) NOT NULL,
+	[Direccion] [varchar](50) NOT NULL,
+	[Telefono] [numeric](18, 0) NOT NULL,
+	[Pbx] [numeric](18, 0) NOT NULL,
+	[Director_General] [varchar](70) NOT NULL,
+	[Telefono_Director] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Regional] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Regional_N] UNIQUE NONCLUSTERED 
+(
+	[Nombre_Regional] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Regional_U] UNIQUE NONCLUSTERED 
+(
+	[id_regional2] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[solicitudes_pendientes]    Script Date: 11/14/2014 22:14:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[solicitudes_pendientes](
+	[Id_Aprendiz] [numeric](18, 0) NULL,
+	[Identificacion] [numeric](18, 0) NOT NULL,
+	[Id_Matricula] [numeric](18, 0) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Aprendiz]    Script Date: 11/14/2014 22:14:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Aprendiz](
+	[Id_Aprendiz] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Identificacion] [numeric](18, 0) NOT NULL,
+	[Tipo_Documento] [varchar](30) NOT NULL,
+	[Nombres] [varchar](50) NOT NULL,
+	[P_Apellido] [varchar](30) NOT NULL,
+	[S_Apellido] [varchar](30) NOT NULL,
+	[Genero] [char](1) NOT NULL,
+	[Fecha_Nacimiento] [date] NOT NULL,
+	[Correo] [varchar](60) NOT NULL,
+	[Telefono] [numeric](18, 0) NOT NULL,
+	[Celular] [numeric](18, 0) NOT NULL,
+	[Rh] [char](3) NOT NULL,
+	[Eps] [varchar](60) NOT NULL,
+	[Direccion] [varchar](max) NOT NULL,
+	[Estado] [char](1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Aprendiz] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [CorreoAp] UNIQUE NONCLUSTERED 
+(
+	[Correo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Id_Uni] UNIQUE NONCLUSTERED 
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[EDT]    Script Date: 11/14/2014 22:14:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[EDT](
+	[Id_EDT] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[id_edt2] [numeric](18, 0) NOT NULL,
+	[Denominacion] [varchar](200) NOT NULL,
+	[Objetivos] [varchar](max) NOT NULL,
+	[Temas] [varchar](max) NOT NULL,
+	[Poblacion_Objetivo] [varchar](50) NULL,
+	[Ocupacion_CNO] [varchar](30) NOT NULL,
+	[Sector_Economico] [varchar](30) NOT NULL,
+	[Gremio_Empresarial] [varchar](30) NOT NULL,
+	[Tipo_EDT] [varchar](30) NOT NULL,
+	[Empresa] [varchar](50) NOT NULL,
+	[Fk_Coordinacion] [int] NOT NULL
+PRIMARY KEY CLUSTERED 
+(
+	[Id_EDT] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Id_EDT_2] UNIQUE NONCLUSTERED 
+(
+	[id_edt2] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [NombreEdt] UNIQUE NONCLUSTERED 
+(
+	[Denominacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Edicion]    Script Date: 11/14/2014 22:14:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Edicion](
+	[Id_Edicion] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Numero_Edicion] [varchar](max) NOT NULL,
+	[Año] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Edicion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  UserDefinedFunction [dbo].[func_usu_DesencriptarContrasenia]    Script Date: 11/14/2014 22:14:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE FUNCTION [dbo].[func_usu_DesencriptarContrasenia](@clave VARBINARY(8000))
+RETURNS VARCHAR(50)
+AS
+BEGIN
+    DECLARE @pass AS VARCHAR(25)
+    ------------------------------------
+     --Se descifra el campo aplicandole la misma llave con la que se cifro Encript0110
+    SET @pass = DECRYPTBYPASSPHRASE('MD2',@clave)
+    ------------------------------------
+    ------------------------------------
+    RETURN @pass
+END
+GO
+/****** Object:  Table [dbo].[Ciudad]    Script Date: 11/14/2014 22:14:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Ciudad](
+	[Id_Ciudad] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NOT NULL,
+	[Fk_Regional] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Ciudad] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [nombre_u] UNIQUE NONCLUSTERED 
+(
+	[Nombre] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Capitulo]    Script Date: 11/14/2014 22:14:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Capitulo](
+	[Id_Capitulo] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](max) NOT NULL,
+	[Fk_Edicion] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Capitulo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  View [dbo].[Buscar_Programas]    Script Date: 11/14/2014 22:14:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[Buscar_Programas]
+as
+select * from EDT
+GO
+/****** Object:  StoredProcedure [dbo].[Regional_Letras]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Regional_Letras]
+@Letra char(1)
+as
+select id_regional2 as 'Código Regional',Nombre_Regional as 'Nombre Regional',Telefono as 'Teléfono',Pbx as 'Teléfono 2',Direccion as 'Direccion',Director_General as 'Director General',Telefono_Director as 'Teléfono Director' from Regional 
+where Regional.Nombre_Regional like 'Region '+@Letra+'%'
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Aprendiz]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Aprendiz]
+@Id_Aprendiz numeric,
+@Identificacion numeric,
+@Tipo_Documento varchar (5),
+@Nombres varchar (50),
+@P_Apellido varchar (30),
+@S_Apellido varchar (30),
+@Genero char(1),
+@Fecha_Nacimiento date,
+@Correo varchar (60),
+@Telefono numeric,
+@Celular numeric,
+@Rh char(3),
+@Eps varchar (60),
+@Direccion varchar(100),
+@Estado char(1)
+as
+update Aprendiz set Identificacion=@Identificacion,Tipo_Documento=@Tipo_Documento,Nombres=@Nombres,P_Apellido=@P_Apellido,S_Apellido=@S_Apellido,Fecha_Nacimiento=@Fecha_Nacimiento,Correo=@Correo,Telefono=@Telefono,Celular=@Celular,Rh=@Rh,Eps=@Eps,Direccion=@Direccion where Id_Aprendiz=@Id_Aprendiz
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Regional]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Regional]
+@Id_Regional numeric,
+@id_regional2 numeric,
+@Nombre_Regional varchar (50),
+@Direccion varchar (50),
+@Telefono numeric,
+@Pbx numeric,
+@Director_General varchar (70),
+@Telefono_Director numeric
+as
+update Regional set id_regional2 = @id_regional2, Nombre_Regional=@Nombre_Regional, Direccion=@Direccion,Telefono=@Telefono,Pbx=@Pbx, Director_General=@Director_General, Telefono_Director=@Telefono_Director where Id_Regional=@Id_Regional
+GO
+/****** Object:  StoredProcedure [dbo].[Update_EDT]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_EDT]
+@Id_EDT numeric,
+@id_edt2 numeric,
+@Denominacion varchar (40),
+@Objetivos varchar (300),
+@Temas varchar (300),
+@Poblacion_Objetivo varchar (50),
+@Ocupacion_CNO varchar (30),
+@Sector_Economico varchar (30),
+@Gremio_Empresarial varchar (30),
+@Tipo_EDT varchar (30),
+@Empresa varchar(50),
+@Fk_Coordinacion int
+as
+update EDT set id_edt2=@id_edt2,Denominacion=@Denominacion,Objetivos=@Objetivos,Temas=@Temas,Poblacion_Objetivo=@Poblacion_Objetivo,Ocupacion_CNO=@Ocupacion_CNO,Sector_Economico=@Sector_Economico,Gremio_Empresarial=@Gremio_Empresarial,Tipo_EDT=@Tipo_EDT,Empresa=@Empresa,Fk_Coordinacion =@Fk_Coordinacion where Id_EDT=@Id_EDT
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Aprendiz]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Aprendiz]
+@Identificacion numeric,
+@Tipo_Documento varchar (5),
+@Nombres varchar (50),
+@P_Apellido varchar (30),
+@S_Apellido varchar (30),
+@Genero char(1),
+@Fecha_Nacimiento date,
+@Correo varchar (60),
+@Telefono numeric,
+@Celular numeric,
+@Rh char(3),
+@Eps varchar (60),
+@Direccion varchar(100),
+@Estado char(1)
+as
+insert into Aprendiz values(@Identificacion,@Tipo_Documento,@Nombres,@P_Apellido,@S_Apellido,@Genero,@Fecha_Nacimiento,@Correo,@Telefono,@Celular,@Rh,@Eps,@Direccion,@Estado)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_EDT]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_EDT]
+@id_edt2 numeric,
+@Denominacion varchar (40),
+@Objetivos varchar (300),
+@Temas varchar (300),
+@Poblacion_Objetivo varchar (50),
+@Ocupacion_CNO varchar (30),
+@Sector_Economico varchar (30),
+@Gremio_Empresarial varchar (30),
+@Tipo_EDT varchar (30),
+@Empresa varchar(50),
+@Fk_Coordinacion int
+as
+insert into EDT values(@id_edt2,@Denominacion,@Objetivos,@Temas,@Poblacion_Objetivo,@Ocupacion_CNO,@Sector_Economico,@Gremio_Empresarial,@Tipo_EDT,@Empresa,@Fk_Coordinacion)
+GO
+/****** Object:  StoredProcedure [dbo].[Programa_Letras]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Programa_Letras]
+@Letra char(1)
+as
+select id_edt2 as 'Código Programa',Denominacion as 'Denominación',Objetivos,Temas,Poblacion_Objetivo as 'Población Objetivo',Sector_Economico as 'Sector Económico',Gremio_Empresarial as 'Gremio Empresarial',Tipo_EDT as 'Tipo Programa',Empresa from EDT 
+where EDT.Denominacion like @Letra+'%'
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Regional]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Regional]
+@id_regional2 numeric,
+@Nombre_Regional varchar (50),
+@Direccion varchar (50),
+@Telefono numeric,
+@Pbx numeric,
+@Director_General varchar (70),
+@Telefono_Director numeric
+as
+insert into Regional values(@id_regional2,@Nombre_Regional,@Direccion,@Telefono,@Pbx,@Director_General,@Telefono_Director)
+GO
+/****** Object:  StoredProcedure [dbo].[Insertar_Ciudad]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insertar_Ciudad]
+@Nombre varchar(max),
+@Fk_Regional numeric
+as
+insert into Ciudad values(@Nombre,@Fk_Regional)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Capitulo]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Capitulo]
+@Nombre varchar(max),
+@Descripcion varchar(max)
+as
+insert into Capitulo values(@Nombre,@Descripcion)
+GO
+/****** Object:  Table [dbo].[Articulo]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Articulo](
+	[Id_Articulo] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](max) NOT NULL,
+	[Fk_Capitulo] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Articulo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Centro]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Centro](
+	[Id_Centro] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[id_centro2] [numeric](18, 0) NOT NULL,
+	[Nombre] [varchar](80) NOT NULL,
+	[Telefono] [numeric](18, 0) NOT NULL,
+	[Direccion] [varchar](50) NOT NULL,
+	[Fk_Ciudad] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Centro] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Id_Centro_U] UNIQUE NONCLUSTERED 
+(
+	[id_centro2] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Nombre_C] UNIQUE NONCLUSTERED 
+(
+	[Nombre] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [TelefonoC] UNIQUE NONCLUSTERED 
+(
+	[Telefono] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Filtro_Ciudad]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Filtro_Ciudad]
+@Id_Regional numeric
+as
+select Ciudad.Id_Ciudad,Ciudad.Nombre,Ciudad.Fk_Regional from Ciudad
+inner join Regional on (Ciudad.Fk_Regional = Regional.Id_Regional)
+where Ciudad.Fk_Regional=@Id_Regional
+GO
+/****** Object:  Table [dbo].[Comite]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Comite](
+	[Id_Comite] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[N_Acta] [numeric](18, 0) NOT NULL,
+	[Fecha_Comite] [date] NOT NULL,
+	[Hora_Inicio] [time](7) NOT NULL,
+	[Hora_Fin] [time](7) NOT NULL,
+	[Oficina] [varchar](max) NOT NULL,
+	[Tipo_de_comite] [varchar](max) NOT NULL,
+	[Fk_Coordinacion] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Comite] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[filtro_centro]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[filtro_centro]
+@NombreRegional varchar (50)
+as
+select * from Centro
+inner join Ciudad on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Regional on (Ciudad.Fk_Regional = Regional.Id_Regional)
+where Regional.Nombre_Regional=@NombreRegional
+GO
+/****** Object:  Table [dbo].[Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Ficha](
+	[Id_Ficha] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[id_ficha2] [numeric](18, 0) NOT NULL,
+	[Estado_Ficha] [char](1) NOT NULL,
+	[Intensidad_Horario] [numeric](18, 0) NOT NULL,
+	[Hora_Entrada] [time](7) NOT NULL,
+	[Hora_Salida] [time](7) NOT NULL,
+	[Fecha_Inicio] [date] NOT NULL,
+	[Fecha_Finalizacion] [date] NOT NULL,
+	[Cupo_Ficha] [numeric](18, 0) NOT NULL,
+	[Fk_Codigo_Sena_EDT] [numeric](18, 0) NOT NULL,
+	[Fk_Centro] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Ficha] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Id_Ficha_U] UNIQUE NONCLUSTERED 
+(
+	[id_ficha2] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Funcionario](
+	[Id_Funcionario] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Identificacion] [numeric](18, 0) NOT NULL,
+	[Tipo_Documento] [varchar](30) NOT NULL,
+	[Nombres] [varchar](30) NOT NULL,
+	[Apellidos] [varchar](40) NOT NULL,
+	[Genero] [char](1) NOT NULL,
+	[Telefono] [numeric](18, 0) NOT NULL,
+	[Correo] [varchar](60) NOT NULL,
+	[Tipo_Vinculacion] [varchar](30) NOT NULL,
+	[Cargo] [varchar](30) NOT NULL,
+	[Rol] [varchar](30) NOT NULL,
+	[Usuario] [varchar](30) NOT NULL,
+	[Contraseña] [varchar](30) NOT NULL,
+	[Estado] [char](1) NOT NULL,
+	[Fk_Centro] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Funcionario] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [CorreoFun] UNIQUE NONCLUSTERED 
+(
+	[Correo] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Id_Fun] UNIQUE NONCLUSTERED 
+(
+	[Identificacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Falta]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Falta](
+	[Id_Falta] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Numeral] [varchar](max) NOT NULL,
+	[Tipo_Falta] [varchar](25) NOT NULL,
+	[Calificacion_Falta] [varchar](15) NOT NULL,
+	[Norma_Infringida] [varchar](200) NOT NULL,
+	[Fk_Articulo] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Falta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Articulo]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Articulo]
+@Descripcion varchar(max),
+@Fk_Comite numeric
+as
+insert into Articulo values(@Descripcion,@Fk_Comite)
+GO
+/****** Object:  StoredProcedure [dbo].[Centro_Letras]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Centro_Letras]
+@variable char(1)
+as
+select Centro.id_centro2 AS 'Código Centro',Centro.Nombre as 'Nombre Centro',Centro.Telefono as 'Teléfono',Centro.Fk_Ciudad AS 'Ciudad',Centro.Direccion as 'Dirección',Regional.Nombre_Regional as 'Regional'from Centro 
+inner join Ciudad on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Regional on (Ciudad.Fk_Regional = Regional.Id_Regional)
+ where Centro.Nombre LIKE 'Centro '+@variable+'%'
+GO
+/****** Object:  Table [dbo].[Oficina]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+create procedure [dbo].[Insert_Centro]
+@id_centro2 numeric,
+@Nombre varchar(80),
+@Telefono numeric,
+@Direccion varchar (50),
+@Fk_Ciudad numeric
+as
+insert into Centro values(@id_centro2,@Nombre,@Telefono,@Direccion,@Fk_Ciudad)
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Centro]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Centro]
+@Id_Centro numeric,
+@id_centro2 numeric,
+@Nombre varchar(80),
+@Telefono numeric,
+@Direccion varchar (50),
+@Oficina varchar (max),
+@Fk_Ciudad numeric
+as
+update Centro set id_centro2=@id_centro2,Nombre=@Nombre,Telefono=@Telefono,Direccion=@Direccion,Fk_Ciudad=@Fk_Ciudad where Id_Centro=@Id_Centro
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Comite]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Comite]
+@Id_Comite numeric,
+@Fecha_Comite date,
+@Hora_Inicio time,
+@Hora_Fin time,
+@Oficina numeric,
+@Tipo_C varchar(max),
+@Fk_Coordinacion int
+as
+update Comite set Fecha_Comite=@Fecha_Comite,Hora_Inicio=@Hora_Inicio,Hora_Fin=@Hora_Fin,Fk_Coordinacion=@Fk_Coordinacion,Oficina=@Oficina, Tipo_de_comite = @Tipo_C where Id_Comite = @Id_Comite
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Update_Funcionario]
+@Identificacion numeric,
+@Tipo_Documento varchar (25),
+@Nombres varchar (30),
+@Apellidos varchar (40),
+@Genero varchar (20),
+@Telefono numeric,
+@Correo varchar (50),
+@Tipo_Vinculacion varchar (30),
+@Cargo varchar (30),
+@Rol varchar(30),
+@Estado varchar(10),
+@Id_Funcionario numeric
+as
+update Funcionario set Identificacion = @Identificacion,Tipo_Documento = @Tipo_Documento,Nombres = @Nombres,Apellidos = @Apellidos,Genero = @Genero,Telefono = @Telefono,Correo = @Correo,Tipo_Vinculacion = @Tipo_Vinculacion,Cargo = @Cargo,Rol = @Rol,Estado = @Estado where Id_Funcionario = @Id_Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Ficha]
+@Id_Ficha numeric,
+@id_ficha2 numeric,
+@Estado_Ficha varchar (40),
+@Intensidad_Horario numeric,
+@Hora_Entrada time,
+@Hora_Salida time,
+@Fecha_Inicio date,
+@Fecha_Finalizacion date,
+@Cupo_Ficha numeric,
+@Fk_Codigo_Sena_EDT numeric,
+@Fk_Centro numeric
+as
+update Ficha set id_ficha2=@id_ficha2,Estado_Ficha=@Estado_Ficha,Intensidad_Horario=@Intensidad_Horario,Hora_Entrada=@Hora_Entrada,Hora_Salida=@Hora_Salida,Fecha_Finalizacion=@Fecha_Finalizacion,Cupo_Ficha=@Cupo_Ficha,Fk_Codigo_Sena_EDT=@Fk_Codigo_Sena_EDT,Fk_Centro=@Fk_Centro where Id_Ficha=@Id_Ficha
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Oficina]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[verificar_correo]
+@Correo varchar(100) 
+as
+select * from Funcionario where Funcionario.Correo COLLATE Latin1_General_CS_AS=@Correo
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Edt_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Edt_Ficha]
+@Id numeric 
+as
+select EDT.Denominacion,EDT.Id_EDT from EDT inner join Ficha on (EDT.Id_EDT = Ficha.Fk_Codigo_Sena_EDT) where Ficha.Id_Ficha = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Ficha_Centro]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Ficha_Centro]
+@Id numeric
+as
+select id_ficha2,Id_Ficha from Ficha where Ficha.Fk_Centro = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traar_Correo_Instructor]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traar_Correo_Instructor]
+@Id_Centro numeric
+as
+select Funcionario.Correo from Funcionario where Funcionario.Fk_Centro = @Id_Centro and Funcionario.Rol = 'Instructor'
+GO
+/****** Object:  View [dbo].[ultimo_mes]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[ultimo_mes]
+as
+SELECT distinct  MAX(DATENAME (MONTH,Fecha_Comite)) as 'Mes' FROM Comite 
+GROUP BY Fecha_Comite
+GO
+/****** Object:  View [dbo].[ultimo_año]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE view [dbo].[ultimo_año]
+as
+SELECT distinct  MAX(DATENAME (YEAR,Fecha_Comite)) as 'Año' FROM Comite 
+GROUP BY Fecha_Comite
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Infromacion_Comite_Citacion]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Infromacion_Comite_Citacion]
+@Id numeric
+as
+select Comite.Oficina, Centro.Direccion, Centro.Fk_Ciudad as 'Ciudad', Comite.Fecha_Comite, Comite.Hora_Inicio from Comite ,Centro
+inner join Coordinacion on (Comite.Fk_Coordinacion = Coordinacion.Fk_centro)
+inner join Ciudad on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad) 
+where Comite.Id_Comite = @Id
+GO
+/****** Object:  View [dbo].[Mostrar_Faltas]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[Mostrar_Faltas]
+as
+select Falta.Id_Falta as 'Codigo de la Falta',Falta.Tipo_Falta as 'Tipo de Falta',Falta.Calificacion_Falta as 'Calificación de la Falta',Falta.Norma_Infringida as 'Norma Infringida' from Falta
+GO
+/****** Object:  Table [dbo].[Matricula]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Matricula](
+	[Id_Matricula] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[EPS] [image] NOT NULL,
+	[Acta_Bachiller] [image] NOT NULL,
+	[Compromiso_Aprendiz] [image] NOT NULL,
+	[Resultado_Icfes] [image] NOT NULL,
+	[Estado] [char](1) NOT NULL,
+	[Fk_Aprendiz] [numeric](18, 0) NOT NULL,
+	[Fk_Ficha] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Matricula] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Logearse]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create table Coordinacion(
+Id_Coordinacion int identity (0,1)primary key,
+Nombre varchar(20),
+Oficina numeric (10),
+Fk_centro numeric
+foreign key(Fk_Centro) references Centro(Id_Centro)
+)
+------------------------------------PROCEDIMIENTOS FUNCIONALIDAD--------------------------------------------------------------
+go
+
+create procedure [dbo].[Logearse]
+@Usuario varchar(30),
+@Contraseña varchar(30)
+as
+select * from Funcionario where ( Funcionario.Usuario COLLATE Latin1_General_CS_AS=@Usuario and HASHBYTES('MD2',@Contraseña) =Funcionario.Contraseña and Funcionario.Estado='A')
+GO
+/****** Object:  Table [dbo].[Participante]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Participante](
+	[Id_Participante] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Tipo_Integrante] [varchar](40) NOT NULL,
+	[Fk_Funcionario] [numeric](18, 0) NOT NULL,
+	[Fk_Comite] [numeric](18, 0) NOT NULL,
+	[Asistencia] [char](1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Participante] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Oficina]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+create procedure [dbo].[Consultar_Comite]
+@Id_Comite numeric 
+as
+select Comite.Fecha_Comite,Comite.Hora_Inicio,Comite.Hora_Fin,Comite.Oficina,Centro.Nombre from Comite,Centro where 
+(Id_Comite=@Id_Comite)
+and (Centro.Id_Centro=Comite.Fk_Centro)
+GO
+/****** Object:  StoredProcedure [dbo].[Consultar_Centro_Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Consultar_Centro_Funcionario]
+@Id numeric
+as 
+select Centro.Nombre,Centro.Id_Centro, Regional.Nombre_Regional from Funcionario 
+inner join Centro on (Funcionario.Fk_Centro = Centro.Id_Centro)
+inner join Ciudad on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Regional on (Regional.Id_Regional = Ciudad.Fk_Regional)
+where Funcionario.Id_Funcionario = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Consulta_Instructor_N_A]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Consulta_Instructor_N_A]
+@Id numeric,
+@Tipo varchar(4),
+@Fk_Centro numeric 
+as
+select Funcionario.Id_Funcionario, Funcionario.Nombres, Funcionario.Apellidos from Funcionario where Funcionario.Identificacion = @Id and Funcionario.Tipo_Documento = @Tipo and Funcionario.Rol = 'Instructor' and Funcionario.Fk_Centro = @Fk_Centro
+GO
+/****** Object:  Table [dbo].[Cambio_Contraseña]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cambio_Contraseña](
+	[Id_Cambio] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Contraseña_A] [varchar](max) NOT NULL,
+	[Fk_Funcionario] [numeric](18, 0) NOT NULL,
+	[Estado] [char](1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Cambio] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  View [dbo].[Buscar_Regional]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[Buscar_Regional]
+as
+select * from Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Actualizar_Contraseña]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Actualizar_Contraseña]
+@Identificacion numeric,
+@Contraseña varchar(30)
+as
+update Funcionario set Contraseña = HASHBYTES('MD2',@Contraseña)where Identificacion = @Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Funcionario]
+@Identificacion numeric,
+@Tipo_Documento varchar (25),
+@Nombres varchar (30),
+@Apellidos varchar (40),
+@Genero varchar (20),
+@Telefono numeric,
+@Correo varchar (50),
+@Tipo_Vinculacion varchar (30),
+@Cargo varchar (30),
+@Rol varchar(30),
+@Usuario varchar(30),
+@Contraseña varchar(30),
+@Estado varchar(10),
+@Fk_Centro numeric
+as
+insert into Funcionario values(@Identificacion,@Tipo_Documento,@Nombres,@Apellidos,@Genero,@Telefono,@Correo,@Tipo_Vinculacion,@Cargo,@Rol,@Usuario,HASHBYTES('MD2',@Contraseña),@Estado,@Fk_Centro)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Ficha]
+@id_ficha2 numeric,
+@Estado_Ficha varchar (40),
+@Intensidad_Horario numeric,
+@Hora_Entrada time,
+@Hora_Salida time,
+@Fecha_Inicio date,
+@Fecha_Finalizacion date,
+@Cupo_Ficha numeric,
+@Fk_Codigo_Sena_EDT numeric,
+@Fk_Centro numeric
+as
+insert into Ficha values(@id_ficha2,@Estado_Ficha,@Intensidad_Horario,@Hora_Entrada,@Hora_Salida,@Fecha_Inicio,@Fecha_Finalizacion,@Cupo_Ficha,@Fk_Codigo_Sena_EDT,@Fk_Centro)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Falta]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Falta]
+@Numeral varchar(max),
+@Tipo_Falta varchar (25),
+@Calificacion_Falta varchar(15),
+@Norma_Infringida varchar (200),
+@Fk_Articulo numeric
+as
+insert into Falta values(@Numeral,@Tipo_Falta,@Calificacion_Falta,@Norma_Infringida,@Fk_Articulo)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Comite]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Comite]
+@N_Acta numeric,
+@Fecha_Comite date,
+@Hora_Inicio time,
+@Hora_Fin time,
+@Oficina numeric,
+@Tipo_C varchar(max),
+@Fk_Centro numeric
+as
+insert into Comite values(@N_Acta,@Fecha_Comite,@Hora_Inicio,@Hora_Fin,@Oficina,@Tipo_C,@Fk_Centro)
+GO
+/****** Object:  StoredProcedure [dbo].[Correo_Coordinador]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Correo_Coordinador]
+@Fk_centro numeric
+as
+select Correo from Funcionario where Fk_Centro = @Fk_centro and Rol = 'Coordinador'
+GO
+/****** Object:  StoredProcedure [dbo].[Faltas_Por_Tipo_Calificacion]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Faltas_Por_Tipo_Calificacion]
+@Tipo_Falta varchar(max),
+@Calificación varchar(max)
+as
+select Capitulo.Nombre, Articulo.Descripcion, Falta.Numeral, Falta.Tipo_Falta,Falta.Calificacion_Falta,Falta.Norma_Infringida from Falta inner join Articulo on (Articulo.Id_Articulo = Falta.Fk_Articulo) inner join Capitulo on (Capitulo.Id_Capitulo = Articulo.Fk_Capitulo) where Falta.Tipo_Falta = @Tipo_Falta and Calificacion_Falta = @Calificación
+GO
+/****** Object:  View [dbo].[Falta_R]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-------------------------------------Vistas--------------------------------------
+create view [dbo].[Falta_R]
+as
+select Capitulo.Nombre, Articulo.Descripcion, Falta.Numeral, Falta.Tipo_Falta,Falta.Calificacion_Falta,Falta.Norma_Infringida from Falta inner join Articulo on (Articulo.Id_Articulo = Falta.Fk_Articulo) inner join Capitulo on (Capitulo.Id_Capitulo = Articulo.Fk_Capitulo)
+GO
+/****** Object:  Table [dbo].[Detalle_Ficha_Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Detalle_Ficha_Funcionario](
+	[Id_Detalle_Ficha_Funcionario] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Fk_Ficha] [numeric](18, 0) NOT NULL,
+	[Fk_Funcionario] [numeric](18, 0) NOT NULL,
+	[Responsabilidad] [varchar](35) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Detalle_Ficha_Funcionario] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Detalle_Falta_Matricula]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Detalle_Falta_Matricula](
+	[Id_Detalle_Falta_Matricula] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Fecha] [date] NOT NULL,
+	[Hechos] [varchar](max) NOT NULL,
+	[Testigos] [varchar](max) NOT NULL,
+	[Recomendacion] [varchar](max) NOT NULL,
+	[Fk_Falta] [numeric](18, 0) NOT NULL,
+	[Fk_Matricula] [numeric](18, 0) NOT NULL,
+	[Etapa] [char](1) NOT NULL,
+	[Estado] [char](1) NOT NULL,
+	[Estado_A] [char](1) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Detalle_Falta_Matricula] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Citacion]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Citacion](
+	[Id_Citacion] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Hora] [time](7) NOT NULL,
+	[Estado_Autori] [varchar](1) NOT NULL,
+	[Estado_Acta] [varchar](1) NOT NULL,
+	[Fk_Comite] [numeric](18, 0) NOT NULL,
+	[Fk_Matricula] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Citacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Aprendiz_por_ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Aprendiz_por_ficha]
+@Ficha int
+as
+select Aprendiz.Tipo_Documento AS 'Tipo de documento',Aprendiz.Identificacion as 'Identificación',Aprendiz.Nombres as 'Nombre(s)',Aprendiz.P_Apellido as 'Primer Apellido',Aprendiz.S_Apellido as 'Segundo Apellido',EDT.Denominacion as 'Programa',Ficha.id_ficha2 as 'N° de Ficha' from Aprendiz 
+inner join Matricula on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) 
+inner join Ficha on (Ficha.Id_Ficha= Matricula.Fk_Ficha)
+inner join EDT on (EDT.Id_EDT = Ficha.Fk_Codigo_Sena_EDT)
+where Ficha.Id_Ficha = @Ficha
+GO
+/****** Object:  StoredProcedure [dbo].[Funcionarios_Comite]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---Trae Las ficha que posee una solicitud de citacion------
+
+
+
+create procedure [dbo].[Funcionarios_Comite]
+@Id_Comite numeric
+as
+select Funcionario.Id_Funcionario as 'Codigo Participante', Funcionario.Nombres,Funcionario.Apellidos,Participante.Tipo_Integrante as 'Función' from Funcionario 
+inner join Participante on (Participante.Fk_Funcionario = Funcionario.Id_Funcionario) 
+inner join Comite on (Participante.Fk_Comite = Comite.Id_Comite) where Comite.Id_Comite=@Id_Comite and Participante.Asistencia = 'P'
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Cambio_Contraseña]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Insert_Cambio_Contraseña]
+@Contraseña varchar(max),
+@Fk_Funcionario numeric,
+@Estado char(1)
+AS
+insert into Cambio_Contraseña values(@Contraseña,@Fk_Funcionario,@Estado)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Detalle_Ficha_Funcionario]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Detalle_Ficha_Funcionario]
+@Fk_Ficha numeric,
+@Fk_Funcionario numeric,
+@Responsabilidad varchar
+as
+insert into Detalle_Ficha_Funcionario values(@Fk_Ficha,@Fk_Funcionario,@Responsabilidad)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Participante]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Participante]
+@Tipo_Integrante varchar (40),
+@Fk_Funcionario numeric,
+@Fk_Comite numeric,
+@Estado char(1)
+as
+insert into Participante values(@Tipo_Integrante,@Fk_Funcionario,@Fk_Comite,@Estado)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Matricula]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Matricula]
+@EPS varchar(50),
+@Acta_Bachiller image,
+@Compromiso_Aprendiz image,
+@Resultado_Icfes image,
+@Estado varchar(10),
+@Fk_Aprendiz numeric,
+@Fk_Ficha numeric
+as
+insert into Matricula values(@EPS,@Acta_Bachiller,@Compromiso_Aprendiz,@Resultado_Icfes,@Estado,@Fk_Aprendiz,@Fk_Ficha)
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Matricula]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Matricula]
+@Id numeric
+as
+select Matricula.Id_Matricula from Matricula inner join Aprendiz on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) where Aprendiz.Identificacion = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Aprendiz_Funcionario_Falta_Todos]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Aprendiz_Funcionario_Falta_Todos]
+@Id numeric
+as
+select Aprendiz.Tipo_Documento as 'Tipo de Documento',Aprendiz.Identificacion,Aprendiz.Nombres as 'Nombre(s)',Aprendiz.P_Apellido as 'Primer Apellido',Aprendiz.S_Apellido as 'Segundo Apellido',Edt.Denominacion as 'Nombre del Programa',Ficha.id_ficha2 as 'N° de Ficha' from Aprendiz
+ inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+ inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) 
+ inner join EDT on Ficha.Fk_Codigo_Sena_EDT=Id_Edt
+ inner join Centro on (Centro.Id_Centro = Ficha.Fk_Centro) 
+ inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha) 
+ inner join Funcionario on   (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario) 
+where Funcionario.Id_Funcionario = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Aprendiz_Funcionario_Falta]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Aprendiz_Funcionario_Falta]
+@Identificacion numeric,
+@Tipo_D varchar(4),
+@Id numeric
+as
+select Aprendiz.Id_Aprendiz,Aprendiz.Nombres,Aprendiz.P_Apellido,Aprendiz.S_Apellido from Aprendiz inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) inner join Centro on (Centro.Id_Centro = Ficha.Fk_Centro) inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha) inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario) where Aprendiz.Identificacion = @Identificacion and Aprendiz.Tipo_Documento = @Tipo_D and Funcionario.Id_Funcionario = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Aprendiz_Centro_Falta]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Aprendiz_Centro_Falta]
+@Identificacion numeric,
+@Tipo_D varchar(4),
+@Id numeric
+as
+select Aprendiz.Id_Aprendiz,Aprendiz.Nombres,Aprendiz.P_Apellido,Aprendiz.S_Apellido from Aprendiz inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) inner join Centro on (Centro.Id_Centro = Ficha.Fk_Centro) where Aprendiz.Identificacion =@Identificacion and Aprendiz.Tipo_Documento =  @Tipo_D and Centro.Id_Centro = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Ficha]
+@Nombre_Regional varchar(100),
+@Nombre_Centro varchar(100),
+@Nombre_Programa varchar(100)
+as
+select Ficha.Id_Ficha,Ficha.id_ficha2,Regional.Nombre_Regional,Centro.Nombre,EDT.Denominacion from Ficha
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Centro on Ficha.Fk_Centro=Centro.Id_Centro
+inner join Ciudad on Centro.Fk_Ciudad = Ciudad.Id_Ciudad
+inner join Regional on Ciudad.Fk_Regional =Regional.Id_Regional
+inner join Detalle_Ficha_Funcionario on Detalle_Ficha_Funcionario.Fk_Ficha=Ficha.Id_Ficha
+inner join Funcionario on Detalle_Ficha_Funcionario.Fk_Funcionario=Funcionario.Id_Funcionario
+where Regional.Nombre_Regional=@Nombre_Regional
+and Centro.Nombre=@Nombre_Centro
+and EDT.Denominacion=@Nombre_Programa
+GO
+/****** Object:  StoredProcedure [dbo].[Instructor_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Instructor_Ficha]
+@Funcionario int
+as
+select Ficha.id_ficha2,Ficha.Id_Ficha from Ficha 
+inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha) 
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Funcionario.Id_Funcionario = @Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Participante_Asistencia]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Participante_Asistencia]
+@Id_P numeric,
+@Estado char(1)
+as
+update Participante set Asistencia = @Estado where Fk_Funcionario = @Id_P
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Matricula]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Matricula]
+@Id_Matricula numeric,
+@EPS varchar(50),
+@Acta_Bachiller image,
+@Compromiso_Aprendiz image,
+@Resultado_Icfes image,
+@Estado varchar(10),
+@Fk_Aprendiz numeric,
+@Fk_Ficha numeric
+as
+update Matricula set EPS=@EPS,Acta_Bachiller=@Acta_Bachiller,Compromiso_Aprendiz=@Compromiso_Aprendiz,Resultado_Icfes=@Resultado_Icfes,Estado = @Estado,Fk_Aprendiz=@Fk_Aprendiz,Fk_Ficha=@Fk_Ficha where Id_Matricula = @Id_Matricula
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Cambio_Contraseña]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Update_Cambio_Contraseña]
+@Id numeric
+as
+update Cambio_Contraseña set Estado='I'where Id_Cambio = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Citacion]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Citacion]
+@Estado varchar(1),
+@Estado2 varchar(1),
+@Id_Citacion numeric
+as
+update Citacion set Estado_Autori = @Estado, Estado_Acta = @Estado2 where Citacion.Id_Citacion = @Id_Citacion
+GO
+/****** Object:  StoredProcedure [dbo].[Mostrar_Ficha_Solicitus]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Mostrar_Ficha_Solicitus]
+@Id numeric
+as
+select DISTINCT Ficha.Id_Ficha as 'Ficha', Ficha.id_ficha2 as 'Nombre' from Ficha inner join Matricula on (Ficha.Id_Ficha = Matricula.Fk_Ficha) inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula) inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro) where  Detalle_Falta_Matricula.Estado = 'A' and Detalle_Falta_Matricula.Estado_A = 'A' and Centro.Id_Centro = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Mostrar_Ficha_Solicitud_Acta_No_Citados]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Mostrar_Ficha_Solicitud_Acta_No_Citados]
+@Id_Centro numeric,
+@Id_Funcionario numeric
+as
+select DISTINCT Ficha.Id_Ficha as 'Ficha', Ficha.id_ficha2 as 'Nombre' from Ficha 
+inner join Matricula on (Ficha.Id_Ficha = Matricula.Fk_Ficha) 
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula) 
+inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro)
+inner join Detalle_Ficha_Funcionario on (Detalle_Ficha_Funcionario.Fk_Ficha = Ficha.Id_Ficha)
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Detalle_Falta_Matricula.Estado = 'A' and Detalle_Falta_Matricula.Estado_A = 'A' and Centro.Id_Centro=@Id_Centro and Funcionario.Id_Funcionario = @Id_Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Mostrar_Ficha_Solicitud_Acta]    Script Date: 11/14/2014 22:14:32 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Mostrar_Ficha_Solicitud_Acta]
+@Id_Centro numeric,
+@Id_Funcionario numeric
+as
+select DISTINCT Ficha.Id_Ficha as 'Ficha', Ficha.id_ficha2 as 'Nombre' from Ficha 
+inner join Matricula on (Ficha.Id_Ficha = Matricula.Fk_Ficha) 
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula) 
+inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro)
+inner join Detalle_Ficha_Funcionario on (Detalle_Ficha_Funcionario.Fk_Ficha = Ficha.Id_Ficha)
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Detalle_Falta_Matricula.Estado = 'I' and Detalle_Falta_Matricula.Estado_A = 'A' and Centro.Id_Centro=@Id_Centro and Funcionario.Id_Funcionario = @Id_Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Instructo_Ficha_Comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Instructo_Ficha_Comite]
+@Id_Comite numeric,
+@Id_Centro numeric
+as
+select DISTINCT Funcionario.Nombres+' '+Funcionario.Apellidos as 'Nombre', Funcionario.Id_Funcionario from Funcionario inner join Detalle_Ficha_Funcionario on (Detalle_Ficha_Funcionario.Fk_Funcionario = Funcionario.Id_Funcionario) inner join Ficha on (Detalle_Ficha_Funcionario.Fk_Ficha = Ficha.Id_Ficha) inner join Matricula on (Ficha.Id_Ficha = Matricula.Fk_Ficha) inner join Detalle_Falta_Matricula on (Detalle_Falta_Matricula.Fk_Matricula = Matricula.Id_Matricula) inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula) inner join Comite on (Comite.Id_Comite = Citacion.Fk_Comite) where Citacion.Estado_Autori = 'A' and Citacion.Estado_Acta = 'I' and Detalle_Falta_Matricula.Estado='I' and Detalle_Falta_Matricula.Estado_A='A' and  Comite.Id_Comite= @Id_Comite and Funcionario.Fk_Centro = @Id_Centro
+GO
+/****** Object:  Table [dbo].[Seguimiento_Solicitud_Citacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Seguimiento_Solicitud_Citacion](
+	[Id_Seguimiento_LLamado] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Descripcion] [varchar](max) NOT NULL,
+	[Fecha] [date] NOT NULL,
+	[Fk_Llamado] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Seguimiento_LLamado] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Seguimiento_Citacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Seguimiento_Citacion]
+@Id numeric 
+as
+select Aprendiz.Tipo_Documento, EDT.Denominacion, Centro.Nombre as 'Nombre_C', Ficha.id_ficha2, Detalle_Falta_Matricula.Hechos, Falta.Tipo_Falta, Falta.Calificacion_Falta, Capitulo.Nombre, Articulo.Descripcion, Falta.Numeral, Falta.Norma_Infringida, Matricula.Id_Matricula from Aprendiz inner join Matricula on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) inner join Ficha on (Ficha.Id_Ficha = Matricula.Fk_Ficha) inner join EDT on (Ficha.Fk_Codigo_Sena_EDT = EDT.Id_EDT) inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro) inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula) inner join Falta on (Falta.Id_Falta = Detalle_Falta_Matricula.Fk_Falta) inner join Articulo on (Falta.Fk_Articulo = Articulo.Id_Articulo) inner join Capitulo on (Capitulo.Id_Capitulo = Articulo.Fk_Capitulo) where Aprendiz.Identificacion = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Traer_Comite]
+@Id_Comite numeric,
+@Id_Ficha numeric
+as
+select Citacion.Id_Citacion as 'Citacion',Centro.Nombre as 'Centro',Aprendiz.Identificacion as 'Identificación',Aprendiz.Nombres,Aprendiz.P_Apellido as 'Apellidos',EDT.Denominacion as 'Programa',Ficha.id_ficha2 as 'Ficha',Detalle_Falta_Matricula.Hechos as 'Hechos', Detalle_Falta_Matricula.Id_Detalle_Falta_Matricula as 'Id_D_F',Falta.Norma_Infringida as 'Norma aplicar' ,Aprendiz.Correo from Citacion 
+inner join Matricula on (Citacion.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Comite on (Citacion.Fk_Comite = Comite.Id_Comite) 
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) 
+inner join EDT on (Ficha.Fk_Codigo_Sena_EDT =EDT.Id_EDT)
+inner join Aprendiz on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro)
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula)
+inner join Falta on (Detalle_Falta_Matricula.Fk_Falta = Falta.Id_Falta)
+where Comite.Id_Comite=@Id_Comite and Citacion.Estado_Autori = 'A' and Citacion.Estado_Acta = 'I'  and Ficha.Id_Ficha =@Id_Ficha and Detalle_Falta_Matricula.Estado='I' and Detalle_Falta_Matricula.Estado_A='A'
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Id_Citacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Id_Citacion]
+@Id numeric 
+as
+select MAX(Id_Citacion) as 'Id' from Citacion inner join Matricula on (Matricula.Id_Matricula = Citacion.Fk_Matricula) where Matricula.Id_Matricula = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Traer_Solicitud]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Traer_Solicitud]
+@Id_Ficha numeric,
+@Id_Comite numeric
+as
+select DISTINCT Ficha.id_ficha2 as 'Ficha', Aprendiz.Tipo_Documento as 'Documento', Aprendiz.Identificacion as 'Identificación', Aprendiz.Nombres as 'Nombre',Aprendiz.P_Apellido as 'Primer Apellido',Aprendiz.S_Apellido as 'Segundo Apellido', Regional.Nombre_Regional as 'Regional',Centro.Nombre as 'Centro', EDT.Denominacion as 'Programa', Aprendiz.Correo, Detalle_Falta_Matricula.Id_Detalle_Falta_Matricula as 'Llamado de Atencion' from Ficha 
+inner join Matricula on (Matricula.Fk_Ficha = Ficha.Id_Ficha) inner join Aprendiz on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) 
+inner join EDT on (Ficha.Fk_Codigo_Sena_EDT = EDT.Id_EDT) 
+inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro) 
+inner join Ciudad on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Regional on (Ciudad.Fk_Regional = Regional.Id_Regional) 
+inner join Detalle_Falta_Matricula on (Detalle_Falta_Matricula.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Comite on (Citacion.Fk_Comite = Comite.Id_Comite) 
+where Ficha.Id_Ficha = @Id_Ficha and  Comite.Id_Comite =  @Id_Comite and Detalle_Falta_Matricula.Estado = 'A' and Detalle_Falta_Matricula.Estado_A = 'A' and Citacion.Estado_Autori = 'I' and Citacion.Estado_Acta = 'I'
+GO
+/****** Object:  Table [dbo].[Noverdad_Citacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Noverdad_Citacion](
+	[Id_Noverdad] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Noverdad] [varchar](max) NOT NULL,
+	[Fecha] [date] NOT NULL,
+	[Fk_Citacion] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Noverdad] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Aprendices_Citados]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Aprendices_Citados]
+@Id_Comite int,
+@Id_Instructor int
+as
+select Ficha.id_ficha2, Aprendiz.Nombres, Aprendiz.P_Apellido+Aprendiz.S_Apellido as 'Apellidos' from Aprendiz
+inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha)
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula)
+inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula)
+inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha)
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Citacion.Estado_Autori = 'A' and Citacion.Estado_Acta = 'I' and Detalle_Falta_Matricula.Estado='I' and Detalle_Falta_Matricula.Estado_A='A' and Citacion.Fk_Comite = @Id_Comite and Funcionario.Id_Funcionario = 509
+GO
+/****** Object:  StoredProcedure [dbo].[informe_citacion_aprendiz_comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[informe_citacion_aprendiz_comite]
+@Id_Aprendiz numeric
+as
+select Funcionario.Nombres+' '+Funcionario.Apellidos as 'funcionario',Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido+' '+Aprendiz.Nombres AS 'apellidos y nombres',cast(Aprendiz.Identificacion as varchar(MAX)) as 'Identificacion',Aprendiz.Correo,EDT.Denominacion,Centro.Direccion,Centro.Nombre,Regional.Nombre_Regional
+,Aprendiz.Tipo_Documento,cast(Ficha.id_ficha2 as varchar(MAX)) as 'Id_Ficha',Detalle_Falta_Matricula.Hechos,Falta.Tipo_Falta,Falta.Calificacion_Falta,Capitulo.Nombre,Articulo.Descripcion,Falta.Norma_Infringida,Comite.Oficina,Centro.Fk_Ciudad,Comite.Fecha_Comite,
+Comite.Hora_Inicio   FROM  Regional
+ inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+ inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+ inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+ inner join Detalle_Ficha_Funcionario on Ficha.Id_Ficha=Detalle_Ficha_Funcionario.Fk_Ficha
+ inner join Funcionario on Funcionario.Fk_Centro=Centro.Id_Centro
+ inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+ inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+ inner join Detalle_Falta_Matricula on Detalle_Falta_Matricula.Fk_Matricula=Matricula.Id_Matricula
+ inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+ inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+ inner join Capitulo on Articulo.Fk_Capitulo=Capitulo.Id_Capitulo
+ inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+ inner join Comite on Comite.Fk_Centro=Centro.Id_Centro
+ where (select MAX(Comite.Id_Comite) from Comite)=Comite.Id_Comite
+ and Funcionario.Cargo='Coordinador' 
+and Aprendiz.Identificacion=@Id_Aprendiz
+GO
+/****** Object:  StoredProcedure [dbo].[Informacion_Solicitud]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion---------------------------------------------------------------------------------------------
+create procedure [dbo].[Informacion_Solicitud]
+@Id numeric 
+as
+select Funcionario.Tipo_Documento, Funcionario.Identificacion, Funcionario.Nombres, Funcionario.Apellidos, Capitulo.Nombre,Articulo.Descripcion,Falta.Id_Falta, Falta.Calificacion_Falta, Falta.Tipo_Falta, Falta.Norma_Infringida, Detalle_Falta_Matricula.Hechos, Detalle_Falta_Matricula.Testigos, Detalle_Falta_Matricula.Recomendacion from Aprendiz inner join Matricula on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) inner join Ficha on (Ficha.Id_Ficha = Matricula.Fk_Ficha) inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha) inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario) inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula) inner join Falta on (Falta.Id_Falta = Detalle_Falta_Matricula.Fk_Falta) inner join Articulo on (Falta.Fk_Articulo = Articulo.Id_Articulo) inner join Capitulo on (Capitulo.Id_Capitulo = Articulo.Fk_Capitulo) where Aprendiz.Identificacion = @Id and Detalle_Falta_Matricula.Estado = 'A' and Detalle_Falta_Matricula.Estado_A='A'
+GO
+/****** Object:  StoredProcedure [dbo].[Informacion_Aprendiz_H_Comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+select * from aprendiz
+go
+create procedure [dbo].[Informacion_Aprendiz_H_Comite]
+@Id numeric 
+as
+select Falta.Tipo_Falta as 'Tipo de falta',Falta.Calificacion_Falta as 'Calificación de la falta',Detalle_Falta_Matricula.Recomendacion as 'Recomenndación' from Falta 
+inner join Detalle_Falta_Matricula on (Detalle_Falta_Matricula.Fk_Falta = Falta.Id_Falta) inner join Matricula on (Detalle_Falta_Matricula.Fk_Matricula = Matricula.Id_Matricula) inner join Aprendiz on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) where Aprendiz.Identificacion = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Historial_Del_Aprendiz]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Historial_Del_Aprendiz]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',Aprendiz.Correo,
+Aprendiz.Celular,Detalle_Falta_Matricula.Fecha,Detalle_Falta_Matricula.Hechos,Falta.Numeral,Falta.Calificacion_Falta,
+Falta.Norma_Infringida,Articulo.Descripcion as 'Articulo',Capitulo.Nombre,EDT.Denominacion,Ficha.id_ficha2 from Aprendiz
+inner join Matricula on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Ficha on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Detalle_Falta_Matricula]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Detalle_Falta_Matricula]
+@Fecha date,
+@Hechos varchar(300),
+@Testigos varchar(300),
+@Recomendacion varchar(300),
+@Fk_Falta numeric(18),
+@Fk_Matricula numeric(18),
+@Etapa char(1),
+@Estado char(1),
+@Estado_A char(1)
+as
+insert into Detalle_Falta_Matricula values(@Fecha,@Hechos,@Testigos,@Recomendacion,@Fk_Falta,@Fk_Matricula,@Etapa,@Estado,@Estado_A)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Citacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Citacion]
+@Hora time,
+@Estado varchar(1),
+@Estado2 varchar(1),
+@Fk_Comite numeric,
+@Fk_Matricula numeric
+as
+insert into Citacion values(@Hora,@Estado,@Estado2,@Fk_Comite,@Fk_Matricula)
+GO
+/****** Object:  StoredProcedure [dbo].[Informe_Registro_Falta_Aprendiz__del_Instructor]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Informe_Registro_Falta_Aprendiz__del_Instructor]
+ @Id_Aprendiz numeric,
+ @Id_Instructor numeric
+ as
+ select  Detalle_Falta_Matricula.Id_Detalle_Falta_Matricula,Regional.Director_General,Centro.Nombre as 'Nombre de Centro',Regional.Nombre_Regional,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombre Aprendiz',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,
+ EDT.Denominacion as 'Nombre del Programa',Ficha.Id_Ficha as 'N° de Ficha',Aprendiz.Correo,Aprendiz.Celular,Detalle_Falta_Matricula.Hechos,Falta.Norma_Infringida,Articulo.Descripcion as 'N° Articulo',Falta.Numeral as 'Numeral Falta',Capitulo.Nombre as 'Capitulo',Detalle_Falta_Matricula.Recomendacion,
+ Funcionario.Nombres+' '+Funcionario.Apellidos as 'Nombre de Instructor',Funcionario.Identificacion ,Funcionario.Correo from Regional
+ inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+ inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+ inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+ inner join Detalle_Ficha_Funcionario on Ficha.Id_Ficha=Detalle_Ficha_Funcionario.Fk_Ficha
+ inner join Funcionario on Detalle_Ficha_Funcionario.Fk_Funcionario=Funcionario.Id_Funcionario
+ inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+ inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+ inner join Detalle_Falta_Matricula on Detalle_Falta_Matricula.Fk_Matricula=Matricula.Id_Matricula
+ inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+ inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+ inner join Capitulo on Articulo.Fk_Capitulo=Capitulo.Id_Capitulo
+ inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+ where (select MAX(Detalle_Falta_Matricula.Id_Detalle_Falta_Matricula) from Detalle_Falta_Matricula)=Detalle_Falta_Matricula.Id_Detalle_Falta_Matricula
+ and
+ Aprendiz.Identificacion=@Id_Aprendiz and Funcionario.Identificacion=@Id_Instructor
+GO
+/****** Object:  Table [dbo].[Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Acta](
+	[Id_Acta] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[N_Acta] [numeric](18, 0) NOT NULL,
+	[Fecha] [date] NOT NULL,
+	[Situacion_Presentada] [varchar](500) NOT NULL,
+	[Norma_Aplicar] [varchar](500) NOT NULL,
+	[Motivo_Novedad] [varchar](500) NOT NULL,
+	[Tipo_Novedad] [varchar](500) NOT NULL,
+	[Recomendacion] [varchar](500) NOT NULL,
+	[Soportes] [char](2) NOT NULL,
+	[Fk_Citacion] [numeric](18, 0) NOT NULL,
+	[Estado] [char](1) NOT NULL,
+	[Conclusion] [varchar](100) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Acta] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [Fk_Citacion_Unica] UNIQUE NONCLUSTERED 
+(
+	[Fk_Citacion] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Cantidad_Citados_Por_Ficha]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Cantidad_Citados_Por_Ficha]
+@Id_Comite int,
+@Id_Ficha int
+as
+select COUNT(*) as 'Cantidad Citados' from Citacion 
+inner join Matricula on (Citacion.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Comite on (Citacion.Fk_Comite = Comite.Id_Comite) 
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) 
+inner join EDT on (Ficha.Fk_Codigo_Sena_EDT =EDT.Id_EDT)
+inner join Aprendiz on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+inner join Centro on (Ficha.Fk_Centro = Centro.Id_Centro)
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula)
+inner join Falta on (Detalle_Falta_Matricula.Fk_Falta = Falta.Id_Falta)
+where Comite.Id_Comite=@Id_Comite and Citacion.Estado_Autori = 'A' and Citacion.Estado_Acta = 'I'  and Ficha.Id_Ficha =@Id_Ficha and Detalle_Falta_Matricula.Estado='I' and Detalle_Falta_Matricula.Estado_A='A'
+GO
+/****** Object:  StoredProcedure [dbo].[Citaciones_Omitidas_Cantidad]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Citaciones_Omitidas_Cantidad]
+@Id_Comite int,
+@Id_Funcionario int
+as
+select COUNT(*) as 'Cantidad_Omitidas' from Noverdad_Citacion
+inner join Citacion on (Citacion.Id_Citacion = Noverdad_Citacion.Fk_Citacion)
+inner join Matricula on (Matricula.Id_Matricula = Citacion.Fk_Matricula)
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha)
+inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha)
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Citacion.Fk_Comite = @Id_Comite and Funcionario.Id_Funcionario = @Id_Funcionario
+GO
+/****** Object:  StoredProcedure [dbo].[Cantidad_Actas_Registradas]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Cantidad_Actas_Registradas]
+@Id numeric
+as
+select Acta.Id_Acta from Acta 
+inner join Citacion on (Citacion.Id_Citacion = Acta.Fk_Citacion) 
+inner join Matricula on (Matricula.Id_Matricula = Citacion.Fk_Matricula) 
+inner join Aprendiz on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) 
+where Aprendiz.Identificacion = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Cancelamiento_Matricula]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Cancelamiento_Matricula]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Regional.Nombre_Regional,Ciudad.Nombre,Centro.Nombre as 'Nombre de Centro',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',Aprendiz.Correo,
+Aprendiz.Celular,Acta.Fecha as 'Fecha del Acta',Acta.N_Acta,Detalle_Falta_Matricula.Hechos,Falta.Numeral,Falta.Calificacion_Falta,
+Falta.Norma_Infringida,Articulo.Descripcion as 'Articulo',Capitulo.Nombre,EDT.Denominacion,Ficha.id_ficha2 from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Aprendices_Omitidos]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Aprendices_Omitidos]
+@Id_Comite int,
+@Id_Instructor int,
+@Id_Ficha int 
+as
+select Ficha.id_ficha2, Aprendiz.Nombres, Noverdad_Citacion.Noverdad from Aprendiz
+inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha)
+inner join Detalle_Falta_Matricula on (Matricula.Id_Matricula = Detalle_Falta_Matricula.Fk_Matricula)
+inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula)
+inner join Noverdad_Citacion on (Noverdad_Citacion.Fk_Citacion = Citacion.Id_Citacion)
+inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha)
+inner join Funcionario on (Funcionario.Id_Funcionario = Detalle_Ficha_Funcionario.Fk_Funcionario)
+where Citacion.Estado_Autori = 'A' and Citacion.Estado_Acta = 'A' and Detalle_Falta_Matricula.Estado='A' and Detalle_Falta_Matricula.Estado_A='A' and Citacion.Fk_Comite = @Id_Comite and Funcionario.Id_Funcionario = @Id_Instructor and Ficha.Id_Ficha = @Id_Ficha
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Acta]
+@N_Acta numeric,
+@Fecha date,
+@Situacion_Presentada varchar (500),
+@Norma_Aplicar varchar (500),
+@Motivo_Novedad varchar (13),
+@Tipo_Novedad varchar (500),
+@Recomendacion varchar (500),
+@Soportes char(2),
+@Fk_Citacion numeric,
+@Estado char(1),
+@Conclusion varchar(100)
+as
+insert into Acta values(@N_Acta,@Fecha,@Situacion_Presentada,@Norma_Aplicar,@Motivo_Novedad,@Tipo_Novedad,@Recomendacion,@Soportes,@Fk_Citacion,@Estado,@Conclusion)
+GO
+/****** Object:  StoredProcedure [dbo].[Informe_Estadistico_Comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Informe_Estadistico_Comite]
+@Año int,
+@Mes varchar(15)
+as
+select Conclusion, count(Conclusion) as 'Número de Registros'from Acta where DATENAME (MONTH,Acta.Fecha)=@Mes 
+and YEAR(Acta.Fecha) = @Año
+group by Conclusion
+having count(Conclusion)>=1
+GO
+/****** Object:  StoredProcedure [dbo].[Informe_de_Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-----------------------------------------------------------
+create procedure [dbo].[Informe_de_Acta]
+@Año varchar(4),
+@Mes varchar(15)
+as
+select Regional.Nombre_Regional,Centro.Nombre as 'Nombre del centro',EDT.Denominacion,Acta.N_Acta,Comite.Fecha_Comite,Comite.Hora_Inicio,Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido+' '+Aprendiz.Nombres as 'Apellidos y Nombres'
+, Aprendiz.Identificacion,Ficha.id_ficha2 as 'Nª de Ficha',Acta.Situacion_Presentada,Acta.Norma_Aplicar,Acta.Motivo_Novedad,Acta.Tipo_Novedad,Acta.Recomendacion from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Acta.Fk_Citacion=Citacion.Id_Citacion
+inner join Comite on Citacion.Fk_Comite=Comite.Id_Comite
+ where DATEPART(YEAR,Comite.Fecha_Comite)=@Año and 
+  DATENAME(MONTH,Comite.Fecha_Comite)=@Mes
+GO
+/****** Object:  StoredProcedure [dbo].[Conteo_Citaciones]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Conteo_Citaciones]
+@Id_Ficha_P numeric,
+@Id_Aprendiz_P numeric
+as
+select Acta.Id_Acta from Acta inner join Citacion on (Acta.Fk_Citacion = Citacion.Id_Citacion) 
+inner join Matricula on (Citacion.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Aprendiz on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) 
+inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha)
+where @Id_Aprendiz_P = Aprendiz.Id_Aprendiz and @Id_Ficha_P=Ficha.Id_Ficha
+GO
+/****** Object:  StoredProcedure [dbo].[Condicionamiento_Matricula]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Condicionamiento_Matricula]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Regional.Nombre_Regional,Centro.Nombre as 'Nombre de Centro',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',Aprendiz.Correo,
+Aprendiz.Celular,Acta.Fecha as 'Fecha del Acta',cast(Acta.N_Acta as varchar(MAX)) as 'N_Acta',Detalle_Falta_Matricula.Hechos,Falta.Numeral,Falta.Calificacion_Falta,
+Falta.Norma_Infringida,Articulo.Descripcion as 'Articulo',Capitulo.Nombre,EDT.Denominacion,Ficha.id_ficha2 from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Acta_ID]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Acta_ID]
+@Id numeric
+as
+select Acta.Id_Acta from Acta inner join Citacion on (Citacion.Id_Citacion = Acta.Fk_Citacion) inner join Matricula on (Matricula.Id_Matricula = Citacion.Fk_Matricula) inner join Aprendiz on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) where Aprendiz.Id_Aprendiz = @Id
+GO
+/****** Object:  StoredProcedure [dbo].[Llamado_Atencion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Llamado_Atencion]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Regional.Director_General,Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',Aprendiz.Correo,
+Aprendiz.Celular,Detalle_Falta_Matricula.Fecha,Detalle_Falta_Matricula.Hechos,Falta.Numeral,Falta.Calificacion_Falta,
+Falta.Norma_Infringida,Articulo.Descripcion as 'Articulo',Capitulo.Nombre,EDT.Denominacion,Ficha.id_ficha2,Acta.Motivo_Novedad from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Mostrat_Ficha_Seguimiento_Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-------------------------en creacion---------------------------------------------------------en creacion---------------------------------------------------------en creacion---------------------------------------------------------en creacion---------------------------------------------------------en creacion---------------------------------------------------------en creacion---------------------------------------------------------en creacion--------------------------------
+
+
+create procedure [dbo].[Mostrat_Ficha_Seguimiento_Acta]
+@Id_Instructor numeric 
+as 
+select Ficha.id_ficha2, Ficha.Id_Ficha from Ficha 
+inner join Matricula on (Matricula.Fk_Ficha = Ficha.Id_Ficha) 
+inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula) 
+inner join Comite on (Citacion.Fk_Comite = Comite.Id_Comite)
+inner join Acta on (Citacion.Id_Citacion = Acta.Fk_Citacion)
+inner join Detalle_Ficha_Funcionario on (Ficha.Id_Ficha = Detalle_Ficha_Funcionario.Fk_Ficha)
+inner join Funcionario on (Detalle_Ficha_Funcionario.Fk_Funcionario = Funcionario.Id_Funcionario)
+where Funcionario.Id_Funcionario = @Id_Instructor and YEAR(Comite.Fecha_Comite) = YEAR(GETDATE()) and Acta.N_Acta = (select Acta.N_Acta from Acta where Acta.Id_Acta = (select MAX(Acta.Id_Acta) from Acta)) and Acta.Estado = 'A'
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Novedad]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+------------------------------ Procedimientos almacenados--------------------------
+
+------------------------------------INSERT-UPDATE----------------------------------
+
+create procedure [dbo].[Insert_Novedad]
+@Novedad varchar(max),
+@Fk_C numeric
+as
+insert into Noverdad_Citacion Values(@Novedad,GETDATE(),@Fk_C)
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Seguimiento_llamado]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Seguimiento_llamado]
+@Descripcion varchar (max),
+@Fecha date,
+@Fk_Llamado numeric 
+as
+insert into Seguimiento_Solicitud_Citacion values(@Descripcion,@Fecha,@Fk_Llamado)
+GO
+/****** Object:  StoredProcedure [dbo].[Update_Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Update_Acta]
+@Id_Acta numeric,
+@Estado char(1)
+as
+update Acta set Acta.Estado = @Estado where Id_Acta=@Id_Acta
+GO
+/****** Object:  StoredProcedure [dbo].[Todos_Los_Reportes]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Todos_Los_Reportes]
+@Mes varchar(10),
+@Recomendacion varchar(40)
+as
+select Regional.Nombre_Regional,Ciudad.Nombre as 'Nombre Ciudad',Centro.Nombre as 'Nombre de Centro',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',Aprendiz.Correo,
+Aprendiz.Celular,Comite.Fecha_Comite as 'Fecha del Acta',Acta.N_Acta,Detalle_Falta_Matricula.Hechos,Falta.Numeral,Falta.Calificacion_Falta,
+Falta.Norma_Infringida,Articulo.Descripcion as 'Articulo',Capitulo.Nombre,EDT.Denominacion,Ficha.id_ficha2 from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Comite on Citacion.Fk_Comite=Comite.Id_Comite
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where DATENAME (MONTH,Comite.Fecha_Comite)=@Mes and (Acta.Tipo_Novedad=@Recomendacion)
+GO
+/****** Object:  StoredProcedure [dbo].[Seguimiento_Acta_Info]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+---------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion------------------------------------------------------------------------------------------------------------------------- Revicion---------------------------------------------------------------------------------------------
+
+
+create procedure [dbo].[Seguimiento_Acta_Info]
+@Ficha numeric
+as
+select Acta.Id_Acta,Acta.N_Acta as 'Numero de Acta', Aprendiz.Nombres, Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Apellidos', EDT.Denominacion, Acta.Recomendacion, Aprendiz.Identificacion from Aprendiz inner join Matricula on (Aprendiz.Id_Aprendiz = Matricula.Fk_Aprendiz) inner join Citacion on (Matricula.Id_Matricula = Citacion.Fk_Matricula) inner join Acta on (Acta.Fk_Citacion = Citacion.Id_Citacion) inner join Ficha on (Matricula.Fk_Ficha = Ficha.Id_Ficha) inner join EDT on (EDT.Id_EDT = Ficha.Fk_Codigo_Sena_EDT) inner join Comite on (Citacion.Fk_Comite = Comite.Id_Comite) where Ficha.Id_Ficha = @Ficha and Acta.N_Acta = (select Acta.N_Acta from Acta where Acta.Id_Acta = (select MAX(Acta.Id_Acta) from Acta)) and YEAR(Comite.Fecha_Comite) = year(GETDATE()) and Acta.Estado = 'A'
+GO
+/****** Object:  Table [dbo].[Seguimiento_Acta]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Seguimiento_Acta](
+	[Id_Seguimiento] [numeric](18, 0) IDENTITY(1,1) NOT NULL,
+	[Estado] [varchar](20) NOT NULL,
+	[Fecha] [date] NOT NULL,
+	[Fk_Acta] [numeric](18, 0) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id_Seguimiento] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  StoredProcedure [dbo].[Reporte_Felicitacion]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Reporte_Felicitacion]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Regional.Nombre_Regional,Centro.Nombre as 'Nombre de Centro',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',
+Acta.Fecha as 'Fecha del Acta',Acta.N_Acta,EDT.Denominacion,Ficha.id_ficha2 from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Reporte_Etapa_Productiva]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Reporte_Etapa_Productiva]
+@Tipodocumento varchar(10),
+@Identificacion numeric
+as
+select Regional.Nombre_Regional,Centro.Nombre as 'Nombre de Centro',Aprendiz.Tipo_Documento,Aprendiz.Identificacion,Aprendiz.Nombres+' '+Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido as 'Nombres y Apellidos',
+Acta.Fecha as 'Fecha del Acta',Acta.N_Acta,EDT.Denominacion,Ficha.id_ficha2 from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join Matricula on Matricula.Fk_Ficha=Ficha.Id_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Citacion.Id_Citacion=Acta.Fk_Citacion
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Detalle_Falta_Matricula on Matricula.Id_Matricula=Detalle_Falta_Matricula.Fk_Matricula
+inner join Falta on Detalle_Falta_Matricula.Fk_Falta=Falta.Id_Falta
+inner join Articulo on Falta.Fk_Articulo=Articulo.Id_Articulo
+inner join Capitulo on Capitulo.Id_Capitulo=Articulo.Fk_Capitulo
+where Aprendiz.Tipo_Documento=@Tipodocumento and Aprendiz.Identificacion=@Identificacion
+GO
+/****** Object:  StoredProcedure [dbo].[Reporte_Consolidado_Actas]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[Reporte_Consolidado_Actas]
+@Año varchar(5)
+as
+select Acta.N_Acta,Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido+' '+Aprendiz.Nombres as 'Apellidos y Nombres'
+, Aprendiz.Identificacion,Ficha.id_ficha2 as 'Nª de Ficha',EDT.Denominacion as 'Especialidad',Acta.Situacion_Presentada,Acta.Motivo_Novedad,Acta.Tipo_Novedad,Acta.Recomendacion,@Año as 'Año' from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Acta.Fk_Citacion=Citacion.Id_Citacion
+inner join Comite on Citacion.Fk_Comite=Comite.Id_Comite
+where  DATEPART(YEAR,Comite.Fecha_Comite)=@Año
+GO
+/****** Object:  StoredProcedure [dbo].[Reporte_Aprendices_Condicionados]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Reporte_Aprendices_Condicionados]
+@Mes varchar(10)
+as
+select Acta.N_Acta,Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido+' '+Aprendiz.Nombres as 'Apellidos y Nombres'
+, Aprendiz.Identificacion,Ficha.id_ficha2 as 'Nª de Ficha',EDT.Denominacion as 'Especialidad',Acta.Situacion_Presentada,Acta.Motivo_Novedad,Acta.Tipo_Novedad,Acta.Recomendacion,Acta.Conclusion from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Acta.Fk_Citacion=Citacion.Id_Citacion
+inner join Comite on Citacion.Fk_Comite=Comite.Id_Comite
+where DATENAME (MONTH,Fecha_Comite)=@Mes
+and Acta.Conclusion='Condicionamiento de matricula'
+GO
+/****** Object:  StoredProcedure [dbo].[Reporte_Aprendices_Cancelados]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Reporte_Aprendices_Cancelados]
+@Mes varchar(10)
+as
+select Acta.N_Acta,Aprendiz.P_Apellido+' '+Aprendiz.S_Apellido+' '+Aprendiz.Nombres as 'Apellidos y Nombres'
+, Aprendiz.Identificacion,Ficha.id_ficha2 as 'Nª de Ficha',EDT.Denominacion as 'Especialidad',Acta.Situacion_Presentada,Acta.Motivo_Novedad,Acta.Tipo_Novedad,Acta.Recomendacion,Acta.Conclusion from Regional
+inner join Ciudad on (Ciudad.Fk_Regional = Regional.Id_Regional)
+inner join Centro on (Centro.Fk_Ciudad = Ciudad.Id_Ciudad)
+inner join Ficha on Centro.Id_Centro=Ficha.Fk_Centro
+inner join EDT on Ficha.Fk_Codigo_Sena_EDT=EDT.Id_EDT
+inner join Matricula on Ficha.Id_Ficha=Matricula.Fk_Ficha
+inner join Aprendiz on Matricula.Fk_Aprendiz=Aprendiz.Id_Aprendiz
+inner join Citacion on Matricula.Id_Matricula=Citacion.Fk_Matricula
+inner join Acta on Acta.Fk_Citacion=Citacion.Id_Citacion
+inner join Comite on Citacion.Fk_Comite=Comite.Id_Comite
+where DATENAME (MONTH,Fecha_Comite)=@Mes
+and Acta.Conclusion='Cancelación de matricula'
+GO
+/****** Object:  StoredProcedure [dbo].[Seguimiento_Aprendiz_Comite]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Seguimiento_Aprendiz_Comite]
+as
+select Aprendiz.Identificacion, Aprendiz.Nombres, Aprendiz.P_Apellido, Aprendiz.S_Apellido, Aprendiz.Correo, Acta.Recomendacion from Aprendiz inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz) inner join Citacion on (Matricula.Id_Matricula = Citacion.Fk_Matricula) inner join Acta on (Acta.Fk_Citacion = Citacion.Id_Citacion) where Acta.N_Acta = (select MAX(N_Acta) as Id from Acta) and Citacion.Estado_Acta = 'A' and Citacion.Estado_Autori = 'A'
+GO
+/****** Object:  StoredProcedure [dbo].[Seguimiento_Apoyo]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Seguimiento_Apoyo]
+@Año int,
+@Mes int
+as
+select Aprendiz.Nombres, Seguimiento_Acta.Estado from Aprendiz 
+inner join Matricula on (Matricula.Fk_Aprendiz = Aprendiz.Id_Aprendiz)
+inner join Citacion on (Citacion.Fk_Matricula = Matricula.Id_Matricula)
+inner join Acta on (Acta.Fk_Citacion = Citacion.Id_Citacion)
+inner join Seguimiento_Acta on (Seguimiento_Acta.Fk_Acta = Acta.Id_Acta) 
+where year(Acta.Fecha) = @Año and MONTH(Acta.Fecha) = @Mes
+GO
+/****** Object:  StoredProcedure [dbo].[Insert_Seguimiento]    Script Date: 11/14/2014 22:14:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[Insert_Seguimiento]
+@Estado varchar (20),
+@Fecha date,
+@Fk_Acta numeric
+as
+insert into Seguimiento_Acta values(@Estado,@Fecha,@Fk_Acta)
+GO
+/****** Object:  Default [DF__Ficha__Estado_Fi__3D2915A8]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha] ADD  DEFAULT ('A') FOR [Estado_Ficha]
+GO
+/****** Object:  Default [DF__Detalle_F__Estad__3C34F16F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Falta_Matricula] ADD  DEFAULT ('A') FOR [Estado_A]
+GO
+/****** Object:  Default [DF__Noverdad___Fecha__3E1D39E1]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Noverdad_Citacion] ADD  DEFAULT (getdate()) FOR [Fecha]
+GO
+/****** Object:  Default [DF__Acta__Norma_Apli__3A4CA8FD]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Acta] ADD  DEFAULT ('Ninguna') FOR [Norma_Aplicar]
+GO
+/****** Object:  Default [DF__Acta__Motivo_Nov__3B40CD36]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Acta] ADD  DEFAULT ('Ninguna') FOR [Motivo_Novedad]
+GO
+/****** Object:  Check [Telefono_1]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Regional]  WITH CHECK ADD  CONSTRAINT [Telefono_1] CHECK  (([Telefono] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Regional] CHECK CONSTRAINT [Telefono_1]
+GO
+/****** Object:  Check [Telefono_D]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Regional]  WITH CHECK ADD  CONSTRAINT [Telefono_D] CHECK  (([Telefono_Director] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Regional] CHECK CONSTRAINT [Telefono_D]
+GO
+/****** Object:  Check [Celular_A]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Celular_A] CHECK  (([Celular] like '[0-3][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Celular_A]
+GO
+/****** Object:  Check [Correo_U]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Correo_U] CHECK  (([Correo] like '%@%.%'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Correo_U]
+GO
+/****** Object:  Check [Estado_A_U]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Estado_A_U] CHECK  (([Estado]='I' OR [Estado]='A'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Estado_A_U]
+GO
+/****** Object:  Check [Fecha_N_A]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Fecha_N_A] CHECK  (([Fecha_Nacimiento]<getdate()))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Fecha_N_A]
+GO
+/****** Object:  Check [Genero_U_A]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Genero_U_A] CHECK  (([Genero]='F' OR [Genero]='M'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Genero_U_A]
+GO
+/****** Object:  Check [Rh_A]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Rh_A] CHECK  (([Rh]='AB+' OR [Rh]='AB-' OR [Rh]='A+' OR [Rh]='A-' OR [Rh]='B+' OR [Rh]='B-' OR [Rh]='O+' OR [Rh]='O-'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Rh_A]
+GO
+/****** Object:  Check [Telefono]    Script Date: 11/14/2014 22:14:09 ******/
+ALTER TABLE [dbo].[Aprendiz]  WITH CHECK ADD  CONSTRAINT [Telefono] CHECK  (([Telefono] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Aprendiz] CHECK CONSTRAINT [Telefono]
+GO
+/****** Object:  Check [Telefono_U_C]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Centro]  WITH CHECK ADD  CONSTRAINT [Telefono_U_C] CHECK  (([Telefono] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Centro] CHECK CONSTRAINT [Telefono_U_C]
+GO
+/****** Object:  Check [V_H]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Comite]  WITH CHECK ADD  CONSTRAINT [V_H] CHECK  (([Hora_Fin]>[Hora_Inicio]))
+GO
+ALTER TABLE [dbo].[Comite] CHECK CONSTRAINT [V_H]
+GO
+/****** Object:  Check [Cupo_Ficha]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD  CONSTRAINT [Cupo_Ficha] CHECK  (([Cupo_Ficha]>(29) AND [Cupo_Ficha]<(40)))
+GO
+ALTER TABLE [dbo].[Ficha] CHECK CONSTRAINT [Cupo_Ficha]
+GO
+/****** Object:  Check [Estado_U_F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD  CONSTRAINT [Estado_U_F] CHECK  (([Estado_Ficha]='I' OR [Estado_Ficha]='A'))
+GO
+ALTER TABLE [dbo].[Ficha] CHECK CONSTRAINT [Estado_U_F]
+GO
+/****** Object:  Check [Fecha_V]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD  CONSTRAINT [Fecha_V] CHECK  (([Fecha_Finalizacion]>[Fecha_Inicio]))
+GO
+ALTER TABLE [dbo].[Ficha] CHECK CONSTRAINT [Fecha_V]
+GO
+/****** Object:  Check [Intensidad_H]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD  CONSTRAINT [Intensidad_H] CHECK  (([Intensidad_Horario]>(3) AND [Intensidad_Horario]<(7)))
+GO
+ALTER TABLE [dbo].[Ficha] CHECK CONSTRAINT [Intensidad_H]
+GO
+/****** Object:  Check [Correo_F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Funcionario]  WITH CHECK ADD  CONSTRAINT [Correo_F] CHECK  (([Correo] like '%@%.%'))
+GO
+ALTER TABLE [dbo].[Funcionario] CHECK CONSTRAINT [Correo_F]
+GO
+/****** Object:  Check [Estaod]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Funcionario]  WITH CHECK ADD  CONSTRAINT [Estaod] CHECK  (([Estado]='I' OR [Estado]='A'))
+GO
+ALTER TABLE [dbo].[Funcionario] CHECK CONSTRAINT [Estaod]
+GO
+/****** Object:  Check [Gene_F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Funcionario]  WITH CHECK ADD  CONSTRAINT [Gene_F] CHECK  (([Genero]='F' OR [Genero]='M'))
+GO
+ALTER TABLE [dbo].[Funcionario] CHECK CONSTRAINT [Gene_F]
+GO
+/****** Object:  Check [Telefono_F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Funcionario]  WITH CHECK ADD  CONSTRAINT [Telefono_F] CHECK  (([Telefono] like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'))
+GO
+ALTER TABLE [dbo].[Funcionario] CHECK CONSTRAINT [Telefono_F]
+GO
+/****** Object:  Check [Estado_M_C]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Matricula]  WITH CHECK ADD  CONSTRAINT [Estado_M_C] CHECK  (([Estado]='I' OR [Estado]='A'))
+GO
+ALTER TABLE [dbo].[Matricula] CHECK CONSTRAINT [Estado_M_C]
+GO
+/****** Object:  Check [EstadoV]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD  CONSTRAINT [EstadoV] CHECK  (([Estado_Autori]='I' OR [Estado_Autori]='A'))
+GO
+ALTER TABLE [dbo].[Citacion] CHECK CONSTRAINT [EstadoV]
+GO
+/****** Object:  Check [EstadoV_2]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD  CONSTRAINT [EstadoV_2] CHECK  (([Estado_Acta]='I' OR [Estado_Acta]='A'))
+GO
+ALTER TABLE [dbo].[Citacion] CHECK CONSTRAINT [EstadoV_2]
+GO
+/****** Object:  Check [Soportes]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Acta]  WITH CHECK ADD  CONSTRAINT [Soportes] CHECK  (([Soportes]='No' OR [Soportes]='Si'))
+GO
+ALTER TABLE [dbo].[Acta] CHECK CONSTRAINT [Soportes]
+GO
+/****** Object:  ForeignKey [FK__Ciudad__Fk_Regio__047AA831]    Script Date: 11/14/2014 22:14:12 ******/
+ALTER TABLE [dbo].[Ciudad]  WITH CHECK ADD FOREIGN KEY([Fk_Regional])
+REFERENCES [dbo].[Regional] ([Id_Regional])
+GO
+/****** Object:  ForeignKey [FK__Ciudad__Fk_Regio__5BAD9CC8]    Script Date: 11/14/2014 22:14:12 ******/
+ALTER TABLE [dbo].[Ciudad]  WITH CHECK ADD FOREIGN KEY([Fk_Regional])
+REFERENCES [dbo].[Regional] ([Id_Regional])
+GO
+/****** Object:  ForeignKey [FK__Capitulo__Fk_Edi__038683F8]    Script Date: 11/14/2014 22:14:12 ******/
+ALTER TABLE [dbo].[Capitulo]  WITH CHECK ADD FOREIGN KEY([Fk_Edicion])
+REFERENCES [dbo].[Edicion] ([Id_Edicion])
+GO
+/****** Object:  ForeignKey [FK__Capitulo__Fk_Edi__57DD0BE4]    Script Date: 11/14/2014 22:14:12 ******/
+ALTER TABLE [dbo].[Capitulo]  WITH CHECK ADD FOREIGN KEY([Fk_Edicion])
+REFERENCES [dbo].[Edicion] ([Id_Edicion])
+GO
+/****** Object:  ForeignKey [FK__Articulo__Fk_Cap__0662F0A3]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Articulo]  WITH CHECK ADD FOREIGN KEY([Fk_Capitulo])
+REFERENCES [dbo].[Capitulo] ([Id_Capitulo])
+GO
+/****** Object:  ForeignKey [FK__Articulo__Fk_Cap__55F4C372]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Articulo]  WITH CHECK ADD FOREIGN KEY([Fk_Capitulo])
+REFERENCES [dbo].[Capitulo] ([Id_Capitulo])
+GO
+/****** Object:  ForeignKey [FK__Centro__Fk_Ciuda__056ECC6A]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Centro]  WITH CHECK ADD FOREIGN KEY([Fk_Ciudad])
+REFERENCES [dbo].[Ciudad] ([Id_Ciudad])
+GO
+/****** Object:  ForeignKey [FK__Centro__Fk_Ciuda__58D1301D]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Centro]  WITH CHECK ADD FOREIGN KEY([Fk_Ciudad])
+REFERENCES [dbo].[Ciudad] ([Id_Ciudad])
+GO
+/****** Object:  ForeignKey [FK__Comite__Fk_Centr__075714DC]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Comite]  WITH CHECK ADD FOREIGN KEY([Fk_Coordinacion])
+REFERENCES [dbo].[Coordinacion] ([Id_Coordinacion])
+GO
+/****** Object:  ForeignKey [FK__Comite__Fk_Centr__5CA1C101]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Comite]  WITH CHECK ADD FOREIGN KEY([Fk_Coordinacion])
+REFERENCES [dbo].[Cordinacion] ([Id_Cordinacion])
+GO
+/****** Object:  ForeignKey [FK__Ficha__Fk_Centro__0A338187]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD FOREIGN KEY([Fk_Centro])
+REFERENCES [dbo].[Centro] ([Id_Centro])
+GO
+
+/****** Object:  ForeignKey [FK__Ficha__Fk_Centro__625A9A57]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD FOREIGN KEY([Fk_Centro])
+REFERENCES [dbo].[Centro] ([Id_Centro])
+GO
+/****** Object:  ForeignKey [FK__Ficha__Fk_Codigo__0B27A5C0]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD FOREIGN KEY([Fk_Codigo_Sena_EDT])
+REFERENCES [dbo].[EDT] ([Id_EDT])
+GO
+/****** Object:  ForeignKey [FK__Ficha__Fk_Codigo__634EBE90]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Ficha]  WITH CHECK ADD FOREIGN KEY([Fk_Codigo_Sena_EDT])
+REFERENCES [dbo].[EDT] ([Id_EDT])
+GO
+/****** Object:  ForeignKey [FK__Funcionar__Fk_Ce__084B3915]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Funcionario]  WITH CHECK ADD FOREIGN KEY([Fk_Coordinacion])
+REFERENCES [dbo].[Cordinacion] ([Id_coordinacion])
+Go
+/****** Object:  ForeignKey [FK__Falta__Fk_Articu__093F5D4E]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Falta]  WITH CHECK ADD FOREIGN KEY([Fk_Articulo])
+REFERENCES [dbo].[Articulo] ([Id_Articulo])
+GO
+/****** Object:  ForeignKey [FK__Falta__Fk_Articu__6166761E]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Falta]  WITH CHECK ADD FOREIGN KEY([Fk_Articulo])
+REFERENCES [dbo].[Articulo] ([Id_Articulo])
+GO
+/****** Object:  ForeignKey [FK__Matricula__Fk_Ap__0EF836A4]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Aprendiz])
+REFERENCES [dbo].[Aprendiz] ([Id_Aprendiz])
+GO
+/****** Object:  ForeignKey [FK__Matricula__Fk_Ap__65370702]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Aprendiz])
+REFERENCES [dbo].[Aprendiz] ([Id_Aprendiz])
+GO
+/****** Object:  ForeignKey [FK__Matricula__Fk_Fi__0FEC5ADD]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Ficha])
+REFERENCES [dbo].[Ficha] ([Id_Ficha])
+GO
+/****** Object:  ForeignKey [FK__Matricula__Fk_Fi__662B2B3B]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Ficha])
+REFERENCES [dbo].[Ficha] ([Id_Ficha])
+GO
+/****** Object:  ForeignKey [FK__Participa__Fk_Co__0D0FEE32]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Participante]  WITH CHECK ADD FOREIGN KEY([Fk_Comite])
+REFERENCES [dbo].[Comite] ([Id_Comite])
+GO
+/****** Object:  ForeignKey [FK__Participa__Fk_Co__690797E6]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Participante]  WITH CHECK ADD FOREIGN KEY([Fk_Comite])
+REFERENCES [dbo].[Comite] ([Id_Comite])
+GO
+/****** Object:  ForeignKey [FK__Participa__Fk_Fu__0E04126B]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Participante]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Participa__Fk_Fu__69FBBC1F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Participante]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Cambio_Co__Fk_Fu__10E07F16]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Cambio_Contraseña]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Cambio_Co__Fk_Fu__56E8E7AB]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Cambio_Contraseña]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fi__11D4A34F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Ficha_Funcionario]  WITH CHECK ADD FOREIGN KEY([Fk_Ficha])
+REFERENCES [dbo].[Ficha] ([Id_Ficha])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fi__5F7E2DAC]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Ficha_Funcionario]  WITH CHECK ADD FOREIGN KEY([Fk_Ficha])
+REFERENCES [dbo].[Ficha] ([Id_Ficha])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fu__12C8C788]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Ficha_Funcionario]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fu__607251E5]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Ficha_Funcionario]  WITH CHECK ADD FOREIGN KEY([Fk_Funcionario])
+REFERENCES [dbo].[Funcionario] ([Id_Funcionario])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fa__13BCEBC1]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Falta_Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Falta])
+REFERENCES [dbo].[Falta] ([Id_Falta])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Fa__5D95E53A]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Falta_Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Falta])
+REFERENCES [dbo].[Falta] ([Id_Falta])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Ma__14B10FFA]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Falta_Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Matricula])
+REFERENCES [dbo].[Matricula] ([Id_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Detalle_F__Fk_Ma__5E8A0973]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Detalle_Falta_Matricula]  WITH CHECK ADD FOREIGN KEY([Fk_Matricula])
+REFERENCES [dbo].[Matricula] ([Id_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Citacion__Fk_Com__15A53433]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Comite])
+REFERENCES [dbo].[Comite] ([Id_Comite])
+GO
+/****** Object:  ForeignKey [FK__Citacion__Fk_Com__59C55456]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Comite])
+REFERENCES [dbo].[Comite] ([Id_Comite])
+GO
+/****** Object:  ForeignKey [FK__Citacion__Fk_Mat__1699586C]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Matricula])
+REFERENCES [dbo].[Matricula] ([Id_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Citacion__Fk_Mat__5AB9788F]    Script Date: 11/14/2014 22:14:32 ******/
+ALTER TABLE [dbo].[Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Matricula])
+REFERENCES [dbo].[Matricula] ([Id_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Seguimien__Fk_Ll__178D7CA5]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Seguimiento_Solicitud_Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Llamado])
+REFERENCES [dbo].[Detalle_Falta_Matricula] ([Id_Detalle_Falta_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Seguimien__Fk_Ll__6BE40491]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Seguimiento_Solicitud_Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Llamado])
+REFERENCES [dbo].[Detalle_Falta_Matricula] ([Id_Detalle_Falta_Matricula])
+GO
+/****** Object:  ForeignKey [FK__Noverdad___Fk_Ci__1881A0DE]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Noverdad_Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Citacion])
+REFERENCES [dbo].[Citacion] ([Id_Citacion])
+GO
+/****** Object:  ForeignKey [FK__Noverdad___Fk_Ci__671F4F74]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Noverdad_Citacion]  WITH CHECK ADD FOREIGN KEY([Fk_Citacion])
+REFERENCES [dbo].[Citacion] ([Id_Citacion])
+GO
+/****** Object:  ForeignKey [FK__Acta__Fk_Citacio__1975C517]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Acta]  WITH CHECK ADD FOREIGN KEY([Fk_Citacion])
+REFERENCES [dbo].[Citacion] ([Id_Citacion])
+GO
+/****** Object:  ForeignKey [FK__Acta__Fk_Citacio__55009F39]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Acta]  WITH CHECK ADD FOREIGN KEY([Fk_Citacion])
+REFERENCES [dbo].[Citacion] ([Id_Citacion])
+GO
+/****** Object:  ForeignKey [FK__Seguimien__Fk_Ac__1A69E950]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Seguimiento_Acta]  WITH CHECK ADD FOREIGN KEY([Fk_Acta])
+REFERENCES [dbo].[Acta] ([Id_Acta])
+GO
+/****** Object:  ForeignKey [FK__Seguimien__Fk_Ac__6AEFE058]    Script Date: 11/14/2014 22:14:33 ******/
+ALTER TABLE [dbo].[Seguimiento_Acta]  WITH CHECK ADD FOREIGN KEY([Fk_Acta])
+REFERENCES [dbo].[Acta] ([Id_Acta])
+GO
